@@ -18,23 +18,31 @@ public class MemoryRepository<E> implements Repository<E> {
     }
 
     @Override
-    public void save(String id, E entity) {
-        map.put(id,entity);
+    public boolean save(String id, E entity) {
+        if(!map.containsKey(id)){
+            map.put(id,entity);
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public void get(String id) {
-        map.get(id);
+    public E get(String id) {
+        return map.get(id);
     }
 
     @Override
-    public void delete(String id) {
-        map.remove(id);
+    public E delete(String id) {
+        return map.remove(id);
     }
 
     @Override
-    public void update(String id, E entity) {
-        map.put(id,entity);
+    public boolean update(String id, E entity) {
+        if(map.containsKey(id)){
+            map.put(id,entity);
+            return true;
+        }
+        return false;
     }
 
     @Override
